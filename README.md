@@ -177,6 +177,206 @@ console.log(notANumber);
 
 ```
 
+> ### Function
+
+Las funciones en js son un tipo especial de objetos.
+
+Existen dos formas de crear una función, declarada o expresada. La primera, es la forma común, mientras que la segunda es asignandola a una variable. La diferencia entre ambas, es que la primera forma, permite invocar la función en cualquier parte de tu código (incluso antes de su creación), mientras que la segunda opción, solo te permite invocar la función después de ser creada.
+
+```JS
+
+//Invoke function
+thisIsAFunction(); //Valid
+
+//Declared function
+function thisIsAFunction(){
+
+    console.log('One');
+    console.log('Two');
+    console.log('Three');
+}
+
+
+//Invoke function
+thisIsAFunction(); //Valid
+
+
+//Invoke function
+expressedFunction(); //Error
+
+//Expressed function
+const expressedFunction = function(){
+        
+    console.log('Expressed Function');
+}
+
+//Invoke function
+expressedFunction(); //Valid
+
+```
+
+> ### Array
+
+```JS
+
+//Method Fill
+const usingFill = Array(100).fill(true);
+
+console.log(usingFill);
+//Output: [true, true, true, true, true...]
+
+```
+
+> ### Object
+
+Se puede utilizar la palabra reservada `this` para referirse al mismo objeto.
+
+Si le asignaremos datos a un objeto mediante variables y estas cuentan con el mismo nombre de la propiedad/atributo, podremos hacer lo siguiente:
+
+```JS
+
+let user = 'enrique123',
+pass = '123456'
+
+const profile = {
+    user,
+    pass
+}
+
+console.log(profile.pass);
+//Output: '123456'
+
+```
+
+También en vez de colocar los métodos como usualmente se hace (es decir, `key: function(){}`) podemos hacerlo de esta manera:
+
+```JS
+
+const human = {
+    cry(){
+        console.log(':(');
+    }
+}
+
+human.cry();
+//Output: ':('
+
+```
+
+
+
+> ### Loop
+
+For in se suele utilizar para los objetos únicamente.
+
+```JS
+//For in
+
+const user = {
+    name: 'Enrique',
+    lastName: 'Chacón'
+};
+
+for(const property in user){
+         
+    console.log(`Key: ${property}, Values: ${user[property]}`);
+    //Output: 'Key: name, Values: Enrique', 'Key: lastName, Values: Chacón'
+}
+
+```
+
+For of se utiliza para cualquier objeto que pueda ser iterable (array, string, etc...)
+
+```JS
+//For of
+
+const array = [5,4,3,2,1];
+
+for(const iterator of array){
+
+    console.log(iterator);
+    //Output: '5,4,3,2,1'
+}
+
+```
+
+> ### Destructuración
+
+La destrucutración nos permite la asignación de datos/valores a variables de una manera más sencilla.
+
+```JS
+
+//Example 1 
+const numbers = [7,8,9];
+
+const [seven,eight,nine] = numbers;
+
+console.log(seven);
+//Output: 7
+
+```
+
+En el caso de las destructuración de objetos, las propiedades/atributos deben llamarse igual a las variables, sino nos arrojará 'undefined'
+
+```JS
+
+const blink182 = {
+    firstDate: '9.5',
+    whatsMyAgeAgain: '8.8',
+    iMissYou: '9.9',
+    theRockShow: '9.1'
+}
+
+
+let {firstDate, whatsMyAgeAgain, iMissYou, theRockShow} = blink182;
+
+console.log(firstDate);
+//Output: '9.5'
+
+let {allTheSmallThings} = blink182;
+
+console.log(allTheSmallThings);
+//Output: undefined
+
+```
+
+> ### REST params and spread operator
+
+Los parametros rest nos permiten recibir más parametros en una función sin la necesidad de colocarlos, ej:
+
+```JS
+
+function multiply(firstNumber, secondNumber, ...anyNumber){
+
+    let result = firstNumber * secondNumber;
+
+    anyNumber.forEach(function(number){
+
+        result *= number;
+    });
+
+    return result;
+}
+
+console.log(multiply(1,2,3,4,5));
+//Output: '120'
+
+```
+
+En el caso del **spread operator** podemos usarlo con array por ej:
+
+```JS
+
+const array1 = [true,false],
+array2 = [1, 0];
+
+const array3 = [...array1, ...array2];
+
+console.log(array3);
+//Output: [true, false, 1, 0]
+//Output without spread operator (...): [array(2), array(2)]
+
+```
 
 
 

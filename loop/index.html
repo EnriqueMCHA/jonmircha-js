@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop</title>
+</head>
+<body>
+    <h1>Loop</h1>
+
+    <script>
+
+    //For in se utiliza para los objetos nada más
+
+    const object = {
+        name: 'Enrique',
+        lastName: 'Chacón'
+    };
+
+    for(const property in object){
+ 
+        console.log(`Key: ${property}, Values: ${object[property]}`);
+    }
+
+    //For of se utiliza para cualquier objeto que pueda ser iterable (array, string, etc...)
+
+    const array = [5,4,3,2,1];
+
+    for(const iterator of array){
+        console.log(iterator);
+    }
+
+
+    </script>
+</body>
+</html>

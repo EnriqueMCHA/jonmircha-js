@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <h1>Function</h1>
+
+    <script>
+        
+    //Invoke function
+    thisIsAFunction(); //Valid
+
+    //Declared function
+    function thisIsAFunction(){
+
+        console.log('One');
+        console.log('Two');
+        console.log('Three');
+    }
+
+
+    //Invoke function
+    thisIsAFunction(); //Valid
+
+
+    //Invoke function
+    expressedFunction(); //Error
+
+    //Expressed function
+    const expressedFunction = function(){
+        
+        console.log('Expressed Function');
+    }
+
+    //Invoke function
+    expressedFunction();
+
+
+    </script>
+</body>
+</html>
