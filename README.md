@@ -378,5 +378,232 @@ console.log(array3);
 
 ```
 
+> ### Arrow Function
+
+- Usa un `return` implicito sin usar `{}`:
+
+```JS
+
+const multiply = (a,b) => a * b;
+        
+console.log(multiply(2,2));
+//Output: 4;
+
+```
+
+- No respeta el contexto en el que se encuentra `this` sino que hereda (por así decirlo) el del padre:
+
+```JS
+
+const litObject = {
+
+    sayHello: () => {
+        console.log(this);
+    },
+
+    sayGoodbye: function(){
+        console.log(this);
+    }
+}
+
+litObject.sayHello(); //Output object Window
+litObject.sayGoodbye(); // Output litObject
+
+```
+
+> ### Prototypes
+
+Las clases en js funcionan mediante prototipos, los cuales a su vez son similares a las clases. Para crear un prototipo podemos hacerlo mediante una función constructura de esta manera:
+
+```JS
+
+//Función constructura
+function User(nickname, password){
+
+    //Atributos
+    this.nickname = nickname;
+    this.password = password;
+
+    //Métodos si el prototipo los necesita aunque es recomendable establecerlos afuera de la función constructura
+
+    this.login = function(){
+
+        console.log('Login Successful');
+    }
+}
+
+User.prototype.logout = function(){
+
+    console.log('Logout Successful');
+}
+
+const newUser = new User('EnriquE','123456');
+
+newUser.login(); //Output: 'Login Successful'
+newUser.logout(); //Output: 'Logout Successful'
+
+```
+
+Al igual que las clases, los prototipos pueden ser heredados por otros e incluso redefinir sus métodos, por ejemplo siguiendo el ejemplo anterior:
+
+```JS
+
+//Herencia prototípica
+function Admin(nickname,password,auth){
+            
+    this.super = User;
+    this.super(nickname,password);
+    this.auth = auth;
+}
+
+//Admin está heredando de User
+Admin.prototype = new User();
+Admin.prototype.constructor = Admin;
+
+//Redefinir métodos heredados
+Admin.prototype.logout = function(){
+
+    console.log('Logout Successful Admin');
+}
+
+Admin.prototype.subscription = function(auth){
+
+    console.log(`Your subscription right now is: ${auth}`);
+}
+
+const userAdmin = new Admin('EuqirnE','123456','Admin+');
+
+userAdmin.logout(); //Output: 'Logout Successful Admin'
+userAdmin.subscription(userAdmin.auth); 
+//Output: 'Your subscription right now is: Admin+'
+
+```
+
+> ### Class
+
+```JS
+
+class User{
+
+    constructor(nickname, password){
+
+        this.nickname = nickname;
+        this.password = password;
+    }
+
+    //Métodos
+    login(){
+        console.log('Login successful!');
+    }
+        
+    logout(){
+        console.log('Logout successful!');
+    }
+}
+
+const _user = new User('EnriquE','123456');
+
+_user.login();
+
+```
+
+Herencia de clases:
+
+```JS
+
+class Admin extends User{
+
+    constructor(nickname, password, auth){
+
+        super(nickname, password);
+        this.auth = auth;
+    }
+
+    login(){
+
+        console.log('Login successful admin!');
+    }
+    
+    subscription(auth){
+
+        console.log(`Your subscription right now is: ${auth}`);
+    }
+}
+
+const _admin = new Admin('EuqirNe','123456','Admin+');
+
+_admin.login();
+_admin.subscription(_admin.auth);
+
+```
+
+Para los métodos estáticos se declara el método de la siguiente manera:
+
+```JS
+
+class Random{
+
+
+    static randomMethod(){
+
+        console.log('Random');
+    }
+}
+
+Random.randomMethod(); //Output: 'Random'
+
+```
+
+Podemos establecer los getters y setters de los atributos usando las palabras reservadas `get` y `set` en los métodos de la siguiente manera:
+
+```JS
+
+class Random {
+
+    constructor(){
+
+        this.dataRandom = null; 
+    }
+
+    get getDataRandom(){
+
+        return this.dataRandom;
+    }
+
+    set setDataRandom(dataRandom){
+
+        this.dataRandom = dataRandom;
+    }
+}
+
+const _random = new Random();
+
+_random.setDataRandom = 'Random attribute';
+
+console.log(_random.getDataRandom); //Output: 'Random Attribute'
+
+```
+
+> ### Operador cortocircuito (|| / &&)
+
+```JS
+
+//Or válida si es true el primero y lo muestra en caso de ser cierto
+
+let condition = 'SoyGod' || false;
+
+console.log(condition) //Output: 'SoyGod'
+
+//And válida si es true el primero y de serlo muestra el segundo
+
+condition = true && 'SoyGod';
+
+console.log(condition) //Output: 'SoyGod'
+
+
+```
+
+
+
 
 

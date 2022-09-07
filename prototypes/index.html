@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototypes</title>
+</head>
+<body>
+    <h1>Prototypes</h1>
+
+    
+    <script>
+
+        //Función constructura
+        function User(nickname, password){
+
+            //Atributos
+            this.nickname = nickname;
+            this.password = password;
+
+            //Métodos si el prototipo los necesita aunque es recomendable establecerlos afuera de la función constructura
+
+            this.login = function(){
+
+                console.log('Login Successful');
+            }
+        }
+
+        User.prototype.logout = function(){
+
+            console.log('Logout Successful');
+        }
+
+        const newUser = new User('EnriquE','123456');
+
+        newUser.login();
+        newUser.logout();
+
+
+        //Herencia prototípica
+        function Admin(nickname,password,auth){
+            
+            this.super = User;
+            this.super(nickname,password);
+            this.auth = auth;
+        }
+
+        //Admin está heredando de User
+        Admin.prototype = new User();
+        Admin.prototype.constructor = Admin;
+
+        //Redefinir métodos heredados, NOTA: no es posible redefinir métodos que se sean definidos por el constructor padre por ej: el método login();
+        Admin.prototype.logout = function(){
+
+            console.log('Logout Successful Admin');
+        }
+
+        Admin.prototype.subscription = function(auth){
+
+            console.log(`Your subscription right now is: ${auth}`);
+        }
+
+        const userAdmin = new Admin('EuqirnE','123456','Admin+');
+
+        userAdmin.logout();
+        userAdmin.subscription(userAdmin.auth);
+
+
+        
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class</title>
+</head>
+<body>
+    <h1>Class</h1>
+
+
+    <script>
+
+    class User{
+
+        constructor(nickname, password){
+
+            this.nickname = nickname;
+            this.password = password;
+        }
+
+        //Métodos
+        login(){
+            console.log('Login successful!');
+        }
+        
+        logout(){
+            console.log('Logout successful!');
+        }
+    }
+
+    const _user = new User('EnriquE','123456');
+
+    _user.login();
+
+    class Admin extends User{
+
+        constructor(nickname, password, auth){
+
+            super(nickname, password);
+            this.auth = auth;
+        }
+
+        login(){
+
+            console.log('Login successful admin!');
+        }
+    
+        subscription(auth){
+
+            console.log(`Your subscription right now is: ${auth}`);
+        }
+    }
+
+    const _admin = new Admin('EuqirNe','123456','Admin+');
+
+    _admin.login();
+    _admin.subscription(_admin.auth);
+
+
+    class Random {
+
+        constructor(){
+
+           this.dataRandom = null; 
+        }
+
+        get getDataRandom(){
+
+            return this.dataRandom;
+        }
+
+        set setDataRandom(dataRandom){
+
+            this.dataRandom = dataRandom;
+        }
+
+
+        static randomMethod() {
+
+            console.log('Random');
+        }
+
+
+    }
+    _random = new Random();
+    
+    console.log(_random.getDataRandom);
+    
+    _random.setDataRandom = 'Random date';
+
+    console.log(_random.getDataRandom);
+    
+    Random.randomMethod(); //Output: 'Random'
+
+    </script>
+</body>
+</html>
