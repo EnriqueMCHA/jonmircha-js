@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios 1</title>
+</head>
+<body>
+    <h1>Ejercicios 1</h1>
+
+    <script>
+        /* 1) Programa una función que cuente el numero de caracteres de una cada de texto, por ej: miFuncion('Hola') devolverá 4; */
+        /* 2) Programa una función que te devuelva el texto recortado según el número de caraceteres indicado, por ej: miFuncion('Hola Mundo',4) devolverá 'Hola'*/
+        /* 3) Programa una función que dada una String te devuelva un Array de textos separados por cierto caracter, por ej: miFuncion('hola que tal',' ') devolverá ['hola','que','tal'] */
+        /* 4) Programa una función que repita un texto X veces, por ej: miFuncion('Hola Mundo', 3) devolverá: hola mundo, hola mundo... */
+
+        //R1
+        +function(string){
+
+            if(typeof string === 'string'){
+            
+                console.log(string.length);
+            } else{
+
+                console.log('The parameter introduced is not a valid string')
+            }
+
+
+        }('Hola Mundo');
+        
+        //R2
+        +function(string, numChar){
+
+            if(typeof string === 'string' && typeof numChar === 'number'){
+
+                console.log(string.slice(0,numChar));
+            } else{
+
+                console.log('The parameter introduced is not a valid string/number')
+            }
+
+
+        }('Hola Mundo', 4);
+
+        //R3
+        +function(string, separator){
+
+            if(typeof string === 'string'){
+
+                console.log(string.split(separator));
+            } else{
+
+                console.log('The parameter introduced is not a valid string')
+            }
+
+
+        }('hola que tal', ' ');
+        
+        //R4
+        +function(string, repeat){
+
+            if(typeof string === 'string' && typeof repeat === 'number'){
+
+                string += ', ' ;    
+                console.log(string.repeat(repeat));
+            } else{
+
+                console.log('The parameter introduced is not a valid string/number')
+            }
+
+
+        }('Hola mundo', 5);
+        
+
+    </script>
+</body>
+</html>

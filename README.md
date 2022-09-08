@@ -603,7 +603,3 @@ console.log(condition) //Output: 'SoyGod'
 
 ```
 
-
-
-
-

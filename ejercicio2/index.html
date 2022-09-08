@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios 2</title>
+</head>
+<body>
+    <h1>Ejercicios 2</h1>
+
+    <script>
+
+        /* 5) Programa una función que invierta las palabras de una cadena de texto, por ej: miFuncion('Hola Mundo') devolverá odnuM aloH*/
+        /* 6) Programa una función para contar el número de veces que se repita una palabra en un texto largo, por ej: miFuncion('hola mundo adios mundo', mundo) devolverá 2*/
+        /* 7) Programa una función que válide si una palabra o frase dada, es palíndromo (que se lee igual en un sentido que en otro), por ej: miFuncion('Salas') devolverá true*/
+        /* 8) Programa una función que elimine cierto patrón de carácteres de un texto dado, por ej: miFuncion('xyz1,xyz2,xyz3,xyz4,xyz5','xyz') devolverá 1,2,3,4 y 5*/
+
+        //R1
+        +function(string){
+
+            let reverseString = string.split('');
+            reverseString = reverseString.reverse();
+
+            console.log(reverseString.join(''));
+
+
+        }('Hola Mundo');
+
+        //R2
+        +function(string, word){
+
+            let regex = new RegExp(word,'g');
+            
+            console.log(string.match(regex).length);
+
+        }('Hola mundo, adios mundo', 'mundo');
+
+        //R3
+        +function(string){
+
+            let reverseString = string.toLowerCase().split('');
+            reverseString = reverseString.reverse();
+            reverseString = reverseString.join('');
+
+            let result = (reverseString === string.toLowerCase()) 
+            ? true 
+            : false;
+
+            console.log(result);
+
+        }('Salas');
+
+        //R4
+        +function(string, pattern){
+
+            let regex = new RegExp(pattern,'g')
+
+            console.log(string.replace(regex,''));
+            
+        }('xyz1,xyz2,xyz3,xyz4,xyz5','xyz');
+
+
+
+
+    </script>
+</body>
+</html>
