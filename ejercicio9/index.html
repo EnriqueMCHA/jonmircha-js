@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9</title>
+</head>
+<body style="background:#262626">
+    <h1 style="color: #dddddd">Ejercicio 9</h1>
+
+    <script>
+        /*
+        27) Programa una clase llamada Pelicula
+        la clase recibirá un objeto al momento de instanciarse con los siguientes datos: id de la película en IMDB, título, director, año de estreno, país o países de origen, géneros y califiación en IMBD
+
+        Todos los datos del objeto son obligatorios.
+        Valida que el id IMDB tenga 9 caracteres, los primeros 2 sean letras y los 7 restantes números.
+
+        El titulo max 100 caracteres.
+        El director max 50 caracteres
+        El año de estreno sea un número entero de 4 digitos
+        El país o paises sea en forma de arreglo
+        Los géneros sea en forma de arreglo
+        Los géneros introducidos esten dentro de los géneros aceptados
+        Crea un método estático que devuelva los géneros aceptados
+        Válida que la calificación sea un número entren 0 y 10 pudidendo ser decimal de una posición
+        Crea un método que devuelva toda la ficha tecnica de la pelicula
+        Apartir de un arreglo con al información de 3 peliculas genera 3 instancias de la clase de forma automatizada e imprime la ficha técnica de cada película.
+
+        Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary, Drama, Family, Film, Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western
+        */
+
+        class Movie{
+
+            constructor({idImdb, title, director, age, country, gender, score}){
+
+                this.idImdb = idImdb;
+                this.title = title;
+                this.director = director;
+                this.age = age;
+                this.country = country;
+                this.gender = gender;
+                this.score = score;
+
+
+                this.validateImdb(idImdb);
+                this.validateTitle(title);
+                this.validateDirector(director);
+                this.validateAge(age);
+                this.validateCountry(country);
+                this.validateGender(gender);
+                this.validateScore(score);
+            }
+
+            validateString(prop, value){
+
+                if(!value) return console.warn(`${prop}: ${value} is empty`);
+
+                if(typeof value !== 'string') return console.error(`${prop}: ${value} is not a string`);
+
+                return true;
+            }
+            
+            validateStringLength(prop,value, maxLength){
+            
+                if(value.length > maxLength) return console.error(`${prop}: ${value} can't have more than ${maxLength} characters`);
+
+                return true;
+            }
+
+            validateNumber(prop, value){
+
+                if(!value) return console.warn(`${prop}: ${value} is empty`);
+
+                if(typeof value !== 'number') return console.error(`${prop}: ${value} is not a number`);
+
+                return true;
+            }
+
+            validateArray(prop, value){
+
+                if(!value) return console.warn(`${prop}: ${value} is empty`);
+
+                if(!value instanceof Array) return console.error(`${prop}: ${value} is not a array`);
+
+                if(value.length === 0) return console.error(`${prop}: ${value} does not have any data`);
+
+                for(let key of value){
+
+                    if(typeof key !== 'string') return console.error(`The value ${key} is not a string`);
+                }
+
+                return true;
+            }
+
+            static get genderList(){
+
+                return ['Action', 'Adult', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Film Noir', 'Game-Show', 'History', 'Horror', 'Musical', 'Music', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi', 'Short', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western'];
+            }
+
+            static acceptedGenders(){
+
+                return console.info(`Accepted genders are: ${Movie.genderList.join(', ')}`);
+            }
+
+            validateImdb(id){
+
+                if(this.validateString('idImdb',id)){
+
+                    if(!(/^([a-z]){2}([0-9]){7}$/.test(id))){
+
+                        return console.error(`idImdb ${id} is not valid`);
+                    }
+                }
+            }
+            
+            validateTitle(title){
+
+                if(this.validateString('title',title)){
+
+                    this.validateStringLength('title',title,100);
+                }
+            }
+
+            validateDirector(director){
+
+                if(this.validateString('director',director)){
+
+                    this.validateStringLength('director',director,50);
+                }
+            }
+
+            validateAge(age){
+
+                if(this.validateNumber('age',age)){
+
+                    if(!(/^([0-9]){4}$/).test(age)){
+
+                        return console.error(`Age ${age} is not valid`);
+                    }
+                }
+            }
+
+            validateCountry(country){
+
+                this.validateArray('country',country);
+            }
+
+            validateGender(gender){
+
+                if(this.validateArray('gender',gender)){
+
+                    for (let key of gender) {
+                        
+                        if(!Movie.genderList.includes(key)){
+
+                            console.error(`The introduced gender '${key}' is not allowed`);
+                        }
+                    }
+                }
+            }
+
+            validateScore(score){
+
+                if(this.validateNumber('score',score)){
+
+                    return (score < 0 || score > 10) 
+                    ? console.error(`Invalid score, it must be between 0-10 points`) 
+                    : this.score = score.toFixed(1);
+                }
+            }
+
+            movieInfo(){
+
+                console.info(`Movie Information:\nTitle:${this.title}\nDirector:${this.director}\nAge:${this.age}\nCountry:${this.country.join('-')}\nGender:${this.gender.join(', ')}\nScore:${this.score}\nIMDB id:${this.idImdb}`);
+            }
+
+        }
+        
+        const newMovie = new Movie({
+
+            idImdb: 'ff1234567',
+            title: 'The Justicer',
+            director: 'Guillermo del Toro',
+            age: 2011,
+            country: ['USA', 'Germany'],
+            gender: ['Action', 'Comedy'],
+            score: 9.5
+        }),
+
+        movies = [{
+
+            idImdb: 'ff1234567',
+            title: 'The Justicer',
+            director: 'Guillermo del Toro',
+            age: 2011,
+            country: ['USA', 'Germany'],
+            gender: ['Action', 'Comedy'],
+            score: 9.5
+            },{
+            idImdb: 'ff1234567',
+            title: 'The Justicer',
+            director: 'Guillermo del Toro',
+            age: 2011,
+            country: ['USA', 'Germany'],
+            gender: ['Action', 'Comedy'],
+            score: 9.5
+            },
+            {
+            idImdb: 'ff1234567',
+            title: 'The Justicer',
+            director: 'Guillermo del Toro',
+            age: 2011,
+            country: ['USA', 'Germany'],
+            gender: ['Action', 'Comedy'],
+            score: 9.5
+        }];
+
+        movies.forEach(element => new Movie(element).movieInfo())
+   
+    </script>
+</body>
+</html>

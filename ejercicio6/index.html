@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios 6</title>
+</head>
+<body>
+    <h1>Ejercicios 6</h1>
+
+    <script>
+        /*18) Programa una función que dada una cadena de texto cuente el número de vocales y consonantes, por ej: miFuncion('Hola Mundo') devolverá Vocales: 4, Consonantes: 5*/ 
+        /*19) Programa una función que valide que un texto sea un nombre válido por ej: miFunción('Jonathan MirCha') devolverá verdadero */ 
+        /*18) Programa una función que valide que un texto sea un email válido, por ejemplo: miFuncion('jonmircha@gmail.com') devolverá verdadero*/
+        
+        //R1
+        +function(string){
+            
+            if(typeof string !== 'string') console.log('Cadena inválida');
+
+            const vocals = /a|e|i|o|u/ig;
+            const consonants = /b|c|d|f|g|h|j|k|l|m|n|ñ|p|q|r|s|t|w|x|y|z/ig;
+
+            console.log(`Vocales: ${string.match(vocals).length}, Consonantes: ${string.match(consonants).length}`)
+
+
+        }('Hola Mundo');
+
+        //R2
+        +function(name){
+            
+            const regex = /^[A-Za-zÑnÁáÉéÍíÓóÚú\s]+$/g
+
+            console.log(new RegExp(regex).test(name));
+        }('Enrique Chacón');
+        
+        //R3
+        +function(email){
+            
+            const regex = /[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/g
+
+            console.log(new RegExp(regex).test(email));
+        }('enrique.chacon@0230gmail.com');
+
+    </script>
+</body>
+</html>

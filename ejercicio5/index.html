@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5</title>
+</head>
+<body style="background: #0095ff;">
+    <h1>Ejercicio 5</h1>
+
+    <div style="width: 400px; height: 400px; margin: 0 auto; background: #ffffff47; text-align: center; border-radius: 2%;">
+       
+        <img src="diagrama.png" style="width: 250px; height: 250px; margin-top: 50px; border-radius: 50%;">
+
+        <h2 style="font-family:Arial, Helvetica, sans-serif">Seguros Queseyo</h2>
+        
+    </div>
+
+    <script>
+        /*15) Programa una función para convertir números de base binaria a decimal y viceversa, por ej: miFuncion(100,2) devolverá 4 base 10*/
+        /*16) Programa una función que devuelva el monto final después de aplicar un descuento a una cantidad dada, por ej: miFuncion(1000,20) devolverá 800*/
+        /*17) Programa una función que dada una fecha válida termine cuantos años han pasado hasta el día de hoy, por ej: miFuncion(new Date(1984,4,23) 35 años (en 2020))*/
+
+        //R1
+        +function(number, base){
+
+            if(base === 2){
+            
+                console.log(parseInt(number,base));
+
+            } else if(base === 10){
+
+                console.log(number.toString(2));
+
+            } else{
+
+                console.error('El tipo de base a convertir no es válido');
+            }
+            
+        }(100,10)
+
+        //R2
+        +function(totalAmount, percent){
+
+            let discount = (totalAmount * percent) / 100;
+
+            console.log(totalAmount - discount);
+
+        }(1000,20);
+
+        //R3
+        +function(date){
+
+            if(!(date instanceof Date)) return console.log('Fecha inválida');
+
+            date = date.toLocaleDateString().split('/');
+            let currentDate = new Date().toLocaleDateString().split('/'),
+            after = false;
+                        
+            if(date[1]-1 >= parseInt(currentDate[1])){
+               
+                if(parseInt(date[0]) > parseInt(currentDate[0])){
+                
+                    after = true;
+                }
+            }
+
+            let years = (!after) 
+            ? Math.abs(currentDate[2] - date[2]) 
+            : Math.abs((currentDate[2] - date[2]) - 1);
+            
+            console.log(years);
+
+        }(new Date(2002,08,30));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejericico 8</title>
+</head>
+<body>
+    <h1>Ejercicio 8</h1>
+
+    <script>
+        /*24) Programa una función que dado un arreglo de números devuelva un objeto con dos arreglos el primero tendrá los números ordenados en forma ascendente y el segundo de forma descendiente, por ej: miFuncion([6,5,7,7,8]) devolverá {asc: [5,6,7,7,8], desc: [8,7,7,6,5]} */
+        /*25) Programa una función que dado un arreglo de elementos, elimine los duplicados, por ej: miFuncion(['x',10,'x',2,10,'10',true,true]) devolderá ['x',10,2,'10',true]*/
+        /*26) Programa una función que dado un arreglo de números obtenga el promedio, por ej: prmedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5*/
+
+        //R1
+        +function(array){
+
+            const asc = array.map(element => element).sort(),
+            desc = array.map(element => element).sort().reverse();
+
+            const orderedNumbers = {
+
+                asc,
+                desc 
+            }
+
+            console.log(orderedNumbers);
+
+        }([1,2,6,5,7,7,8])
+
+        //R2
+        +function(array){
+
+            const duplicated = array.filter((value,index,self) => self.indexOf(value) === index);
+
+            console.log(duplicated);
+        
+        }(['x',10,'x',2,10,'10',true,true]);
+
+        //R3
+        +function(array){
+
+            avg = array.reduce((acum,value,index,newArray) => {
+
+                acum += value;
+
+                if(index === newArray.length-1){
+
+                    return `The average of ${newArray.join(' + ')} is: ${acum / newArray.length}` 
+                } else{
+                    
+                    return acum;
+                }
+            })
+
+            console.log(avg);
+
+        }([9,8,7,6,5,4,3,2,1,0]);
+
+    </script>
+</body>
+</html>

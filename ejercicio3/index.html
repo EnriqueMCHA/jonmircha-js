@@ -40,6 +40,12 @@
         //R3
         console.log(+function(number){
 
+            if(typeof number !== 'number') return console.error(`El valor ${number} ingresado, no es un número`);
+
+            if(number === 0) return console.error('El número no puede ser 0');
+
+            if(Math.sign(number) === -1) return console.error('El número no puede ser negativo');
+
             let factorial = 1;
             
             for(let i = 1; i <= number; i++){
@@ -50,7 +56,7 @@
             
             return factorial;
 
-        }(10000))
+        }(12))
 
 
     </script>
