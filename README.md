@@ -603,3 +603,67 @@ console.log(condition) //Output: 'SoyGod'
 
 ```
 
+> ### Asíncronía en Javascript
+
+
+
+Código Síncrono Bloqueante:
+
+```JS
+
+(() => {
+
+    console.log('Start');
+
+    function two(){
+
+        console.log('Two');
+    }
+
+    function one(){
+
+        console.log('One');
+        two();
+        console.log('Three');
+    }
+
+    one();
+    console.log('End');
+
+})();
+
+//Output: One, Two, Three, End
+```
+
+Código Asíncrono No Bloqueante:
+
+```JS
+
+(() => {
+
+    console.log('Start');
+
+    function two(){
+
+        setTimeout(() => {
+            
+            console.log('Two');
+        }, 1000);
+    }
+
+    function one(){
+
+        setTimeout(() => {
+            
+            console.log('One');
+        }, 0);
+        two();
+        console.log('Three');
+    }
+
+    one();
+    console.log('End');
+
+//Output: Three, End, One, Two
+```
+
