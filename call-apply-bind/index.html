@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call-Apply-Bind</title>
+</head>
+<body style="background: #222222">
+    <h1 style="color: #d2d2d2">Call-Apply-Bind</h1>
+    
+<script>
+
+
+
+this.context = 'Global Context';
+
+function rateMusic(music, score){
+
+    console.log(`The music ${music} has the following score ${score} in the ${this.context}`);
+}
+
+rateMusic('Numb',9.1);
+//Output: The music Numb has the following score 9.1 in the Global Context
+
+const music = { 
+
+    context: 'Object Context',
+    rateMusic: function(){
+        console.log(`${this.context}`);
+    }
+}
+
+rateMusic.apply(music,['Breaking the Habit',11]);
+//Output: 'The music Breaking the Habit has the following score 11 in the Object Context'
+
+rateMusic.apply(null,['Breaking the Habit',11]);
+rateMusic.apply(this,['Breaking the Habit',11]);
+//Output: 'The music Breaking the Habit has the following score 11 in the Global Context
+
+const music2 = {
+
+    //rateMusic: music.rateMusic //undefined
+    //rateMusic: music.rateMusic.bind() //Global Context
+    rateMusic: music.rateMusic.bind(music) //Object Context
+}
+
+music.rateMusic();
+music2.rateMusic();
+</script>
+</body>
+</html>

@@ -667,3 +667,301 @@ Código Asíncrono No Bloqueante:
 //Output: Three, End, One, Two
 ```
 
+> ### Symbol
+
+- Crear elementos/propiedades privadas dentro de los objetos con una referencia única.
+
+- No es necesario usar el operador `new`.
+
+- Para su uso es necesario el uso de `[]`.
+
+```JS
+
+let newSymbol = Symbol('newSymbol');
+let listSong = Symbol();
+
+console.log(typeof newSymbol, typeof listSong); //symbol
+console.log(newSymbol === listSong); // False
+
+const music = {
+    
+    [newSymbol]: 'Here Without You',
+    [listSong](){
+
+        console.log('Don\'t Stay');
+    }
+}
+
+console.log(music); 
+//Output: {Symbol(newSymbol): 'Here Without You', Symbol(): ƒ}
+
+music[listSong]();
+//Output: Don't Stay
+
+music[listSong] = function(){
+
+    console.log('Don\'t Stay');
+    console.log('Numb');
+}
+
+music[listSong]();
+//Output: Don't Stay, Numb
+
+```
+
+> ### Set
+
+- Nos permite crear una especie de `array` pero donde no se pueden repetir los valores.
+
+- Permite el uso de forEach y for of.
+
+- Para acceder a los valores individualmente hay que convertir el Set a Array.
+
+- Para conocer la cantidad de elementos no sería con `length` sino con `size`.
+
+```JS
+
+const newSet = new Set();
+
+newSet.add(1);
+newSet.add(2);
+newSet.add(3);
+newSet.add(3);
+
+console.log(newSet);
+//Output: {1,2,3}   
+        
+newSet.delete(3);
+console.log(newSet);
+//Output: {1,2}
+
+console.log(newSet[0]); //undefined
+
+//Set to Array
+const array = Array.from(newSet);
+        
+console.log(array[0]); //1
+
+newSet.clear();
+console.log(newSet); //Output: {}
+
+```
+
+> ### Map (Tipo de dato)
+
+- Cuenta con métodos/propiedades similares a los `Set`.
+
+- Son similares a los array indexados.
+
+```JS
+
+const newMap = new Map();
+
+newMap.set('name', 'Enrique');
+newMap.set('name', 'Enrique');
+newMap.set('lastName', 'Chacon');
+newMap.set('email', 'enrique.chacon.com');
+
+console.log(newMap);
+//Output: {'name' => 'Enrique', 'lastName' => 'Chacon', 'email' => 'enrique.chacon.com'}
+
+console.log(newMap.get('name')); //Output: Enrique
+
+newMap.delete('email');
+console.log(newMap);
+//{'name' => 'Enrique', 'lastName' => 'Chacon'}
+        
+for (let [index,value] of newMap) {
+
+    console.log(index, value);
+    //Output: 'name Enrique', 'lastName Chacon'
+}
+
+const mapKeys = [... newMap.keys()],
+mapValues = [... newMap.values()];
+
+console.log(mapKeys); //Output: ['name', 'lastName']
+console.log(mapValues); //Output: ['Enrique', 'Chacon']
+
+```
+
+> ### WeakSet y WeakMap 
+
+- No se pueden interar los datos.
+
+- No se puede hacer uso del método `clear();` ni la propiedad `size`.
+
+- No se puede asignar valores desde el constructor, para ello se usa el método `add();` en el caso de los Set y `set();` en el caso de los Map. Y estos deberán pasarse por referencia.
+
+
+> ### Generations (Generadores)
+
+- Sirven para volver una función iterable.
+
+- Permite una asincronía no bloqueante a diferencia del `async/await` que sí es bloqueante.
+
+```JS
+
+function * iterableFunction(){
+
+    yield 'First yield';
+    yield 'Second yield';
+    yield 'Third yield';
+}
+
+let iterable = iterableFunction();
+
+//Acceder manual
+// console.log(iterable.next().value);
+// console.log(iterable.next().value);
+// console.log(iterable.next().value);
+        // console.log(iterable.next().value);
+
+for (const y of iterable) {
+
+    console.log(y);
+    //Output: First yield, Second yield, Third yield
+}
+
+const resultYield = [...iterableFunction()];
+//Output: [First yield, Second yield, Third yield]
+
+function squareFunction(value){
+
+    setTimeout(() => {
+                
+        return console.log(value, value * value);
+
+    }, Math.random() * 1000);
+}
+
+function * squareGenerator(){
+
+    yield squareFunction(2);
+    yield squareFunction(7);
+    yield squareFunction(21);
+}
+
+const generator = squareGenerator();
+
+for (let y of generator) {
+            
+    console.log(y) //undefined
+}
+
+```
+
+> ### Proxies (Proxy)
+
+- Hace una vinculación con el objeto original y el copia.
+
+- A través de su manejador (handler) podemos hacer las validaciones, antes de la asignación de datos.
+
+```JS
+
+//Objeto original
+const user = {
+    name: "",
+    lastName: "",
+    email: "",
+    dni: 0,
+};
+
+//Majenador
+const handler = {
+    set(obj, prop, value) {
+        //Validaciones
+
+        //Validar que solo se permitan las propiedades del objeto original
+        if (Object.keys(obj).indexOf(prop) === -1) return console.error(`La propiedad ${prop} no existe en el objeto 'user'`);
+
+        if (prop === "dni" && !/^[0-9]{7}$/g.test(value)) return console.error(`El dni ${value} es inválido`);
+
+        obj[prop] = value;
+    },
+};
+
+const enrique = new Proxy(user, handler);
+
+enrique.name = "Enrique";
+enrique.lastName = "Chacón";
+enrique.email = "enrique.chacon.com";
+enrique.dni = 1234567;
+enrique.test = "random"; //error
+
+console.log(enrique);
+//Output: {name: 'Enrique', lastName: 'Chacón', email: 'enrique.chacon.com', dni: 1234567}
+
+```
+
+> ### Propiedades dinámicas de los objetos
+
+```JS
+
+let random = Math.round(Math.random() * 100 + 3);
+
+const users = ['Enrique','Keice', 'Kease'];
+
+const objUser = {
+    
+    //Crear propiedades dinámicas
+    [`id_${random}`]: 'Random Value'
+}
+
+users.forEach((value,index) => {
+
+    objUser[`id_${index}`] = value;
+})
+
+console.log(objUser);
+//Output: {id_xx: 'Random Value', id_0: 'Enrique', id_1: 'Keice', id_2: 'Kease'}
+```
+
+> ### This (apply, call, bind)
+
+- Contexto global es `window`.
+
+- Los métodos `apply` y `call` cumplen con el mismo funcionamiento, pero los atributos se pasan diferente. En `call` se pasan separados por comas y `apply` con un `array`.
+
+- Se puede pasar como objeto el valor `null`, el cual se regresará al contexto global.
+
+- El método `bind` nos permitirá conectar contextos diferentes.
+
+```JS
+
+this.context = 'Global Context';
+
+function rateMusic(music, score){
+
+    console.log(`The music ${music} has the following score ${score} in the ${this.context}`);
+}
+
+rateMusic('Numb',9.1);
+//Output: The music Numb has the following score 9.1 in the Global Context
+
+const music = { 
+
+    context: 'Object Context',
+    rateMusic: function(){
+        console.log(`${this.context}`);
+    }
+}
+
+rateMusic.apply(music,['Breaking the Habit',11]);
+//Output: 'The music Breaking the Habit has the following score 11 in the Object Context'
+
+rateMusic.apply(null,['Breaking the Habit',11]);
+rateMusic.apply(this,['Breaking the Habit',11]);
+//Output: 'The music Breaking the Habit has the following score 11 in the Global Context
+
+const music2 = {
+
+    //rateMusic: music.rateMusic //undefined
+    //rateMusic: music.rateMusic.bind() //Global Context
+    rateMusic: music.rateMusic.bind(music) //Object Context
+}
+
+music.rateMusic();
+music2.rateMusic();
+
+```

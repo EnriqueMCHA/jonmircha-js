@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbol-set-map</title>
+</head>
+<body style="background: #222222">
+    <h1 style="color: #dddddd">Symbol-set-map</h1>
+
+    <script>
+
+        const newSymbol = Symbol();
+        const listSong = Symbol();
+
+        console.log(typeof newSymbol, typeof listSong);
+        console.log(newSymbol === listSong);
+
+        const music = {
+
+            [newSymbol]: 'Here Without You',
+            [listSong](){
+                console.log('Don\'t Stay');
+            }
+        }
+
+        console.log(music[newSymbol]);
+        music[listSong]();
+
+        music[listSong] = function(){
+
+            console.log('Don\'t Stay');
+            console.log('Numb');
+        }
+
+        music[listSong]();
+
+
+        
+        const newSet = new Set();
+
+        newSet.add(1);
+        newSet.add(2);
+        newSet.add(3);
+        newSet.add(3);
+
+        console.log(newSet);
+        //Output: {1,2,3}   
+        
+        newSet.delete(3);
+        console.log(newSet);
+        //Output: {1,2}
+
+        console.log(newSet[0]); //undefined
+        
+        const array = Array.from(newSet);
+        
+        console.log(array[0]); //1
+
+        newSet.clear();
+        console.log(newSet); //Output: {}
+
+
+        const newMap = new Map();
+
+        newMap.set('name', 'Enrique');
+        newMap.set('name', 'Enrique');
+        newMap.set('lastName', 'Chacon');
+        newMap.set('email', 'enrique.chacon.com');
+
+        console.log(newMap);
+        //Output: {'name' => 'Enrique', 'lastName' => 'Chacon', 'email' => 'enrique.chacon.com'}
+
+        console.log(newMap.get('name')); //Output: Enrique
+
+        newMap.delete('email');
+        console.log(newMap);
+        //{'name' => 'Enrique', 'lastName' => 'Chacon'}
+        
+        for (let [index,value] of newMap) {
+
+            console.log(index, value);
+            //Output: 'name Enrique', 'lastName Chacon'
+        }
+
+        const mapKeys = [... newMap.keys()],
+        mapValues = [... newMap.values()];
+
+        console.log(mapKeys); //Output: ['name', 'lastName']
+        console.log(mapValues); //Output: ['Enrique', 'Chacon']
+
+    </script>
+</body>
+</html>

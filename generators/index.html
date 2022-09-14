@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generators</title>
+</head>
+<body style="background: #222222">
+    <h1 style="color: #dddddd">Generators</h1>
+
+
+    <script>
+
+        function * iterableFunction(){
+
+            yield 'First yield';
+            yield 'Second yield';
+            yield 'Third yield';
+        }
+
+        let iterable = iterableFunction();
+
+        //Acceder manual
+        // console.log(iterable.next().value);
+        // console.log(iterable.next().value);
+        // console.log(iterable.next().value);
+        // console.log(iterable.next().value);
+
+        for (const y of iterable) {
+
+            console.log(y);
+            //Output: First yield, Second yield, Third yield
+        }
+
+        const resultYield = [...iterableFunction()];
+        //Output: [First yield, Second yield, Third yield]
+
+        function squareFunction(value){
+
+            setTimeout(() => {
+                
+                return console.log(value, value * value);
+
+            }, Math.random() * 1000);
+        }
+
+        function * squareGenerator(){
+
+            yield squareFunction(2);
+            yield squareFunction(7);
+            yield squareFunction(21);
+        }
+
+        const generator = squareGenerator();
+
+        for (let y of generator) {
+            
+           console.log(y) //undefined
+        }
+
+    </script>
+</body>
+</html>

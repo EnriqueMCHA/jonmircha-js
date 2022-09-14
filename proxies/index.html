@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proxies</title>
+</head>
+
+<body style="background: #222222">
+    <h1 style="color: #dddddd">Proxies</h1>
+
+    <script>
+        //Objeto original
+            const user = {
+                name: "",
+                lastName: "",
+                email: "",
+                dni: 0,
+            };
+
+            //Majenador
+            const handler = {
+                set(obj, prop, value) {
+                    //Validaciones
+
+                    //Validar que solo se permitan las propiedades del objeto original
+                    if (Object.keys(obj).indexOf(prop) === -1)
+                        return console.error(
+                            `La propiedad ${prop} no existe en el objeto 'user'`
+                        );
+
+                    if (prop === "dni" && !/^[0-9]{7}$/g.test(value))
+                        return console.error(`El dni ${value} es inválido`);
+
+                    obj[prop] = value;
+                },
+            };
+
+            const enrique = new Proxy(user, handler);
+
+            enrique.name = "Enrique";
+            enrique.lastName = "Chacón";
+            enrique.email = "enrique.chacon.com";
+            enrique.dni = 1234567;
+            enrique.test = "random"; //error
+
+            console.log(enrique);
+      //Output: {name: 'Enrique', lastName: 'Chacón', email: 'enrique.chacon.com', dni: 1234567}
+
+
+
+
+    </script>
+</body>
+
+</html>
