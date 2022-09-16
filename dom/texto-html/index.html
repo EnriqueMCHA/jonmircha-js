@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM (Document Object Model)</title>
+
+    <style>
+        :root{
+            --yellow-color: #F7DF1E;
+            --black-color: #222;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DOM (Document Object Model)</h1>
+
+    <h2 id="title" data-id="2" data-description="Sub-Title" class="sub-title title">Sub-Title</h2>
+
+<script>
+
+const $subTitle = document.querySelector('.sub-title');
+
+//Solo texto
+$subTitle.textContent = `
+<b>Soy un texto</b>
+<br>
+<b>Soy un texto v2</b>
+`;
+
+//Texto con html
+$subTitle.innerHTML = `
+<b>Soy un texto</b>
+<br>
+<b>Soy un texto v2</b>
+`;
+
+//Texto con html pero remplanzado las etiquetas
+$subTitle.outerHTML = `
+<b>Soy un texto</b>
+<br>
+<b>Soy un texto v2</b>
+`;
+
+</script>
+</body>
+</html>

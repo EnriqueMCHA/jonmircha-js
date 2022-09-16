@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM (Document Object Model)</title>
+
+    <style>
+        :root{
+            --yellow-color: #F7DF1E;
+            --black-color: #222;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DOM (Document Object Model)</h1>
+
+    <h2 id="title" data-id="2" data-description="Sub-Title" class="sub-title">Sub-Title</h2>
+
+<script>
+
+const $subTitle = document.querySelector('.sub-title');
+
+$subTitle.style.color = '#ddd';
+
+console.log($subTitle.style);
+console.log($subTitle.style.color);
+console.log(getComputedStyle($subTitle));
+console.log(getComputedStyle($subTitle).getPropertyValue('color'));
+
+//Variables CSS
+
+const $html = document.documentElement,
+$body = document.body;
+
+let jsColor = getComputedStyle($html).getPropertyValue('--yellow-color'),
+bgColor = getComputedStyle($html).getPropertyValue('--black-color');
+
+$body.style.backgroundColor = bgColor;
+$body.style.color = jsColor;
+
+$html.style.setProperty('--black-color','#000');
+bgColor = getComputedStyle($html).getPropertyValue('--black-color');
+console.log(bgColor);
+
+$body.style.setProperty('background-color',bgColor);
+
+</script>
+</body>
+</html>

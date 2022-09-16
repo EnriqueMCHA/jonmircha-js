@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selectores - DOM</title>
+</head>
+<body style="background: #222">
+
+    <h1 class="titulo" style="color: #ddd">Selectores - DOM</h1>
+    <h1 class="sub-titulo" style="color: #ddd">Selectores - DOM</h1>
+
+    <input type="text" name="aInput" id="input-1">
+
+<script>
+
+//Por etiqueta (no usable)
+console.log(document.getElementsByTagName('h1'));
+
+//Por clase (no usable)
+console.log(document.getElementsByClassName('titulo'));
+
+//Por name (no usable)
+console.log(document.getElementsByName('aInput'));
+
+//Por id
+console.log(document.getElementById('input-1'));
+
+//Para seleccionar el primer elemento
+console.log(document.querySelector('h1'));
+
+//Para seleccionar todos los elementos
+console.log(document.querySelectorAll('h1'));
+
+</script>
+</body>
+</html>

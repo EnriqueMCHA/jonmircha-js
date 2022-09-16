@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM (Document Object Model)</title>
+
+    <style>
+        :root{
+            --yellow-color: #F7DF1E;
+            --black-color: #222;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DOM (Document Object Model)</h1>
+
+    <h2 id="title" data-id="2" data-description="Sub-Title" class="sub-title title">Sub-Title</h2>
+
+<script>
+
+const $subTitle = document.querySelector('.sub-title');
+
+//Obtener clases
+console.log($subTitle.className);
+console.log($subTitle.classList);
+
+//Agregar clases
+$subTitle.classList.add('nro-one','nro-two');
+
+//Eliminar clases
+$subTitle.classList.remove('nro-one','sub-title');
+
+//Toggle (Si la clase ya está agregada, se elimina. Caso contrario, la agrega)
+$subTitle.classList.toggle('nro-one');
+
+//Remplazar clases
+$subTitle.classList.replace('nro-one','nro-three');
+
+//Validar si una clase ya está agregada
+
+console.log($subTitle.classList.contains('nro-three'));
+//Return true
+
+</script>
+</body>
+</html>

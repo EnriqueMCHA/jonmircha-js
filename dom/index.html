@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM (Document Object Model)</title>
+</head>
+<body style="background: #222">
+
+    <h1 style="color: #ddd">DOM (Document Object Model)</h1>
+
+<script>
+
+console.log(document);
+ 
+//Obtener head
+console.log(document.head);
+
+//Obtener body
+console.log(document.body);
+
+//Obtener HTML
+console.log(document.documentElement);
+
+//Obtener Doctype
+console.log(document.doctype);
+
+//Obtener charset
+console.log(document.charset);
+
+//Obtener title
+console.log(document.title);
+
+//Obtener links
+console.log(document.links);
+
+//Obtener images
+console.log(document.images);
+
+//Obtener formularios
+console.log(document.forms);
+
+//Obtener styleSheets
+console.log(document.styleSheets);
+
+//Obtener scripts
+console.log(document.scripts);
+
+//Obtener lo que se seleccione
+setTimeout(() => {
+
+    console.log(document.getSelection().toString());
+}, 3000);
+
+//Escribir en el document (no recomendado)
+document.write('<h1 style="color: #ddd">Using a document.write()</h1>');
+
+</script>
+</body>
+</html>

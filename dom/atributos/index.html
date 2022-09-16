@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM (Document Object Model)</title>
+</head>
+<body style="background: #222">
+
+    <h1 style="color: #ddd">DOM (Document Object Model)</h1>
+
+    <h2 id="title" data-id="2" data-description="Sub-Title" class="sub-title">Sub-Title</h2>
+
+<script>
+
+const $subTitle = document.querySelector('.sub-title');
+
+
+//Get attributes
+console.log(document.documentElement.lang);
+console.log(document.documentElement.getAttribute('lang'));
+
+//Get dataset attributes
+console.log($subTitle.dataset.description);
+console.log($subTitle.getAttribute('data-description'))
+
+//Set attributes
+document.documentElement.lang = 'es';
+document.documentElement.setAttribute('lang','es');
+
+//Remove attributes
+$subTitle.removeAttribute('id');
+
+//Validate if attribute exists
+console.log($subTitle.hasAttribute('id'));
+
+//Create attributes
+$subTitle.setAttribute('style','color:#ddd');
+
+
+</script>
+</body>
+</html>
