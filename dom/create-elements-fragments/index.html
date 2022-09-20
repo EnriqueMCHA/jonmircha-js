@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM (Document Object Model)</title>
+
+    <style>
+        :root{
+            --yellow-color: #F7DF1E;
+            --black-color: #222;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DOM (Document Object Model)</h1>
+
+    <article class="sub-content">
+        <h2 id="title" data-id="2" data-description="Sub-Title" class="sub-title title">Sub-Title</h2>
+        <p>This is a P</p>
+    </article>
+
+<script>
+
+const $subContent = document.querySelector('.sub-content');
+
+//Creando elemento con createElement
+const $article = document.createElement('article'),
+$ul = document.createElement('ul'),
+$li = document.createElement('li'),
+$liText = document.createTextNode('Inserting data...');
+$body = document.body;
+
+$li.appendChild($liText);
+$ul.appendChild($li);
+$article.appendChild($ul);
+$body.appendChild($article);
+
+//Creando elemento con innerHTML
+const $li2 = document.createElement('li');
+
+$li2.innerHTML = `
+    Inserting data from innerHTML...
+`;
+
+$ul.appendChild($li2);
+
+//Creando elementos
+const seasons = ['Summer','Winter','Spring','Fall'];
+
+seasons.forEach(e => {
+
+const $liSeasons = document.createElement('li');
+$liSeasons.textContent = e;
+$ul.appendChild($liSeasons);
+})
+
+//Creando elementos con innerHTML
+
+//En caso de error inicializar el innerHTML 
+//$ul.innerHTML = '';
+
+seasons.forEach(e => {
+
+    $ul.innerHTML += `<li>${e}</li>`
+})
+
+//Creando elementos con framentos
+
+const $sings = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpion','Sagittarius','Capricornus','Aquarius','Pisces'],
+
+$ul2 = document.createElement('ul'),
+$fragment = document.createDocumentFragment();
+
+$sings.forEach(e => {
+
+    const $li =  document.createElement('li');
+    $li.textContent =  e;
+    $fragment.appendChild($li);
+})
+
+$ul2.appendChild($fragment);
+$article.appendChild($ul2);
+
+
+
+
+</script>
+</body>
+</html>

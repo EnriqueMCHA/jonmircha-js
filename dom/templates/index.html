@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM (Document Object Model)</title>
+
+    <style>
+        :root{
+            --yellow-color: #F7DF1E;
+            --black-color: #222;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DOM (Document Object Model) - Random Images</h1>
+
+    <article class="random-images">
+    </article>
+
+    <template id="template-random">
+        <figure>
+            <img>
+            <figcaption></figcaption>
+        </figure>
+    </template>
+
+<script>
+//El .content nos devuelve el contenido de la etiqueta y no toda la etiqueta
+const $template = document.getElementById('template-random').content,
+$randomImg = document.querySelector('.random-images'),
+$fragment = document.createDocumentFragment();
+
+
+const renderImages = function(json){
+
+    const randomList = json;
+
+    randomList.forEach(el => {
+        
+        //Usar classList para los estilos
+        $template.querySelector('figure').setAttribute('style','display: inline-block');
+        $template.querySelector('img').setAttribute('src',el.download_url);
+        $template.querySelector('img').setAttribute('alt',el.id);
+        $template.querySelector('img').setAttribute('width','200px');
+        $template.querySelector('img').setAttribute('height','200px');
+        $template.querySelector('figcaption').textContent = `Autor: ${el.author}`;
+
+        //importNode nos permite clonar un nodo, si su segundo parametro es true copiará todo la estructura interna.
+        let clone = document.importNode($template,true);
+        console.log(clone);
+        $fragment.appendChild(clone);
+    })
+
+    $randomImg.appendChild($fragment);
+}
+
+const response = fetch('https://picsum.photos/v2/list')
+.then(response => response.json())
+.then(json => renderImages(json));
+
+
+
+</script>
+</body>
+</html>

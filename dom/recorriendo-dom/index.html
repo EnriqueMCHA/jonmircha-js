@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM (Document Object Model)</title>
+
+    <style>
+        :root{
+            --yellow-color: #F7DF1E;
+            --black-color: #222;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DOM (Document Object Model)</h1>
+
+    <article class="sub-content">
+        <h2 id="title" data-id="2" data-description="Sub-Title" class="sub-title title">Sub-Title</h2>
+        <p>This is a P</p>
+    </article>
+
+<script>
+
+const $subContent = document.querySelector('.sub-content');
+
+//Para acceder a los hijos
+console.log($subContent.childNodes); //Nodos
+console.log($subContent.children); //Elementos
+console.log($subContent.children[1]);
+console.log($subContent.parentElement);
+console.log($subContent.parentNode);
+console.log($subContent.firstElementChild); //Elementos
+console.log($subContent.firstChild); //Nodos
+console.log($subContent.lastChild); //Nodos
+console.log($subContent.lastElementChild); //Elementos
+console.log($subContent.nextElementSibling); //Elementos
+console.log($subContent.nextSibling); //Nodos
+console.log($subContent.previousElementSibling); //Elementos
+console.log($subContent.previousSibling); //Nodos
+
+//Para buscar el ancestro del elemento
+console.log($subContent.closest('body'));
+console.log($subContent.children[1].closest('body'));
+
+
+
+</script>
+</body>
+</html>
