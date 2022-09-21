@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM (Document Object Model)</title>
+
+    <style>
+        :root{
+            --yellow-color: #F7DF1E;
+            --black-color: #222;
+        }
+
+        .flow-event div{
+            padding: 4rem;
+            font-size: 2rem;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .delegation-event div{
+            padding: 4rem;
+            font-size: 2rem;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .one{
+            background: yellow;
+        }
+
+        .two{
+            background: gold;
+        }
+
+        .three{
+            background: lightyellow;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>DOM (Document Object Model) - Event Handlers</h1>
+
+    <button onclick="eventRandom()">Desde la etiqueta HTML</button>
+
+    <button id="semantic-event">Evento Semántico</button>
+
+    <button id="multiple-event">Evento Multiple</button>
+
+    <button id="remove-event">Remover Evento</button>
+
+    <section class="flow-event">
+        <div class="one">
+            1
+            <div class="two">
+                2
+                <div class="three">
+                    3
+                    <a href="https://www.google.com" target="_blank" rel="noopener">Google</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="delegation-event">
+        <div class="one">
+            1
+            <div class="two">
+                2
+                <div class="three">
+                    3
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<script>
+
+function eventRandom(e){
+
+    alert('Alert from eventRandom function!');
+    console.log(e);
+    console.log(event);
+}
+
+const eventWithParam = (name = 'Unknown') => {
+
+    alert(`Hello ${name}`);
+}
+
+const $semanticEvent = document.getElementById('semantic-event');
+
+$semanticEvent.onclick = eventRandom; // Will be not executed
+$semanticEvent.onclick = function(){
+
+    alert('Alert from semantic event!');
+}
+
+const $multipleEvent = document.getElementById('multiple-event');
+
+$multipleEvent.addEventListener('click',eventRandom); //Will be executed
+$multipleEvent.addEventListener('click', e => { 
+
+    alert('Alert from multiple event!');
+    console.log(e.target);
+    console.log(e.type);
+    console.log(e);
+});
+
+//Para recibir parámetros
+$multipleEvent.addEventListener('click', e => {
+
+    eventWithParam();
+    eventWithParam('Enrique');
+});
+
+//Pare remover elementos
+const $removeEvent = document.getElementById('remove-event');
+
+const removeDblClick = e => {
+
+    alert('Alert from remove event');
+    console.log(e);
+    $removeEvent.removeEventListener('dblclick',removeDblClick);
+    $removeEvent.disabled = true;
+}
+
+$removeEvent.addEventListener('dblclick', removeDblClick);
+
+
+/*---------------------------------------*/
+
+const $eventsDivs = document.querySelectorAll('.flow-event div'),
+$linkEvents = document.querySelector('.flow-event a');
+
+console.log($eventsDivs);
+
+function flowEvent(e){
+    
+    console.log(`Class: ${this.className}, Event target: ${e.target.className}`);
+
+    //Para evitar la propagación
+    e.stopPropagation();
+}
+
+$eventsDivs.forEach(div => {
+    
+    //Fase de burbuja
+    div.addEventListener('click',flowEvent);
+    // div.addEventListener('click',flowEvent,false);
+
+   //Fase de captura
+   //div.addEventListener('click',flowEvent,true);
+//    div.addEventListener('click',flowEvent,{
+
+//         //Capture para especificar fases (burbuja/captura)
+//         capture: false,
+//         //Once para que se ejecuté una sola vez 
+//         once: false
+//     })
+})
+
+$linkEvents.addEventListener('click',e => {
+
+    alert('Accediendo al link');
+    e.preventDefault();
+    e.stopPropagation();
+});
+
+document.addEventListener('click', e => {
+
+    if(e.target.matches('.delegation-event div')){
+
+        flowEvent(e);
+    }
+
+    if(e.target.matches('.delegation-event a')){
+
+        e.preventDefault();
+        alert('Presionaste el <a>');
+    }
+});
+
+</script>
+</body>
+</html>

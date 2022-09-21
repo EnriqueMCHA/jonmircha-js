@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM (Document Object Model)</title>
+
+    <style>
+        :root{
+            --yellow-color: #F7DF1E;
+            --black-color: #222;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DOM (Document Object Model) - Random Images</h1>
+
+    <article class="random-images">
+        <figure>
+            <img src="https://picsum.photos/id/237/200" alt="">
+        </figure>
+        <figure>
+            <img src="https://picsum.photos/id/123/200" alt="">
+        </figure>
+        <figure>
+            <img src="https://picsum.photos/id/321/200" alt="">
+        </figure>
+        <figure>
+            <img src="https://picsum.photos/id/111/200" alt="">
+        </figure>
+    </article>
+
+<script>
+
+const $randomImages = document.querySelector('.random-images'),
+$newRandomImage = document.createElement('figure'),
+$img = document.createElement('img');
+$newRandomImage1 = document.createElement('figure'),
+$cloneArticle = $randomImages.cloneNode(true);
+//cloneNode funciona igual que el importNode, a diferencia de que este genera todo de manera dinámica
+
+$newRandomImage.innerHTML = `
+    <img src="https://picsum.photos/200"></img>
+`;
+$newRandomImage1.innerHTML = `
+    <img src="https://picsum.photos/200"></img>
+`;
+
+//Remplazar
+//$randomImages.replaceChild($newRandomImage,$randomImages.children[2]);
+
+//Eliminar
+//$randomImages.removeChild($randomImages.lastElementChild);
+
+//Insertar en algún sitio especifico
+//$randomImages.insertBefore($newRandomImage1,$randomImages.firstElementChild);
+
+//Clonar nodo
+//document.body.appendChild($cloneArticle);
+
+/*--------------------------------*/
+
+//Cool Style:
+
+let separator = `<p>Separator</p>`;
+
+$randomImages.insertAdjacentText('beforebegin',separator);
+$randomImages.insertAdjacentHTML('beforebegin',separator);
+$randomImages.insertAdjacentElement('afterbegin',$newRandomImage);
+
+// $randomImages.before($newRandomImage);
+// $randomImages.prepend($newRandomImage,$newRandomImage1);
+// $randomImages.append($newRandomImage);
+// $randomImages.after($newRandomImage);
+
+</script>
+</body>
+</html>
